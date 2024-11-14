@@ -1,0 +1,286 @@
+// Создание базы данных
+CREATE DATABASE IF NOT EXISTS training;
+
+// переключение на базу данных
+USE training;
+
+// Создание таблицы users
+CREATE TABLE IF NOT EXISTS `users` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(255) NOT NULL,
+	PRIMARY KEY(`id`)
+);
+
+// Создание таблицы users_profile
+CREATE TABLE IF NOT EXISTS `users_profile` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT NOT NULL,
+	`name` VARCHAR(255) NOT NULL,
+	`email` VARCHAR(255) UNIQUE NOT NULL,
+	PRIMARY KEY(`id`)
+);
+
+// Создание таблицы addresses
+CREATE TABLE IF NOT EXISTS `addresses` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`address` VARCHAR(255) NOT NULL,
+	PRIMARY KEY(`id`)
+);
+
+// Создание таблицы services
+CREATE TABLE IF NOT EXISTS `services` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`service` VARCHAR(255) NOT NULL,
+	PRIMARY KEY(`id`)
+);
+
+// Создание таблицы service_price
+CREATE TABLE IF NOT EXISTS `service_price` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_service` INT NOT NULL,
+	`service_price` FLOAT NOT NULL,
+	PRIMARY KEY(`id`)
+);
+
+// Создание таблицы orders
+CREATE TABLE IF NOT EXISTS `orders` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_user` INT NOT NULL,
+	`status` VARCHAR(255) NOT NULL,
+	id_address INT NOT NULL,
+	PRIMARY KEY (`id`)
+)
+
+// Создание таблицы order_details
+CREATE TABLE IF NOT EXISTS `order_details` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_order` INT NOT NULL,
+	`id_service` INT NOT NULL,
+	PRIMARY KEY(`id`)
+);
+
+// Создание таблицы payments
+CREATE TABLE IF NOT EXISTS `payments` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id_user` INT NOT NULL,
+	`id_order` INT NOT NULL,
+	payment_amount FLOAT NOT NULL,
+	PRIMARY KEY(`id`)
+);
+
+// Создание таблицы user_addresses
+CREATE TABLE `user_addresses` (
+	`user_id` INT NOT NULL,
+	`id_address` INT NOT NULL,
+	PRIMARY KEY (`user_id`, `id_address`)
+);
+
+// Создание таблицы additional_services
+CREATE TABLE `additional_services` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`additional_service` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+// Создание таблицы services_additional_services
+CREATE TABLE `services_additional_services` (
+	`service_id` INT UNSIGNED NOT NULL,
+	`additional_service_id` INT UNSIGNED NOT NULL,
+	PRIMARY KEY (`service_id`, `additional_service_id`)
+);
+
+// Вставка таблица users
+INSERT INTO `users` (id, username) VALUES (1, 'First user');
+INSERT INTO `users` (id, username) VALUES (2, 'Second user');
+INSERT INTO `users` (id, username) VALUES (3, 'Third user');
+INSERT INTO `users` (id, username) VALUES (4, 'Fourth user');
+INSERT INTO `users` (id, username) VALUES (5, 'Fifth user');
+INSERT INTO `users` (id, username) VALUES (6, 'Sixth user');
+INSERT INTO `users` (id, username) VALUES (7, 'Seventh user');
+INSERT INTO `users` (id, username) VALUES (8, 'Eighth user');
+INSERT INTO `users` (id, username) VALUES (9, 'Ninth user');
+INSERT INTO `users` (id, username) VALUES (10, 'Tenth user');
+
+// Вставка таблица users_profile
+INSERT INTO `users_profile` (`id`, `user_id`, `name`, `email`) VALUES (1, 1, 'Щербакова Нина Никитична', 'xixado_fone76@yahoo.com');
+INSERT INTO `users_profile` (`id`, `user_id`, `name`, `email`) VALUES (2, 2, 'Леонов Александр Арсентьевич', 'careye_lano96@internet.ru');
+INSERT INTO `users_profile` (`id`, `user_id`, `name`, `email`) VALUES (3, 3, 'Антипова София Тихоновна', 'nemo_tobuti16@bk.ru');
+INSERT INTO `users_profile` (`id`, `user_id`, `name`, `email`) VALUES (4, 4, 'Кузнецов Дмитрий Даниилович', 'vehohel-ibe18@mail.ru');
+INSERT INTO `users_profile` (`id`, `user_id`, `name`, `email`) VALUES (5, 5, 'Боброва Виктория Матвеевна', 'conid-isepe74@gmail.com');
+INSERT INTO `users_profile` (`id`, `user_id`, `name`, `email`) VALUES (6, 6, 'Панфилов Сергей Михайлович', 'poki_yolazo30@yandex.ru');
+INSERT INTO `users_profile` (`id`, `user_id`, `name`, `email`) VALUES (7, 7, 'Михеева Василиса Алексеевна', 'vabu-lizopu78@hotmail.com');
+INSERT INTO `users_profile` (`id`, `user_id`, `name`, `email`) VALUES (8, 8, 'Данилов Роман Иванович', 'rerece-tera89@bk.ru');
+INSERT INTO `users_profile` (`id`, `user_id`, `name`, `email`) VALUES (9, 9, 'Иванова Каролина Александровна', 'xet_ayerosu89@yahoo.com');
+INSERT INTO `users_profile` (`id`, `user_id`, `name`, `email`) VALUES (10, 10, 'Потапова Василиса Степановна', 'bowa-fohaso21@inbox.ru');
+
+// Вставка таблица addresses
+INSERT INTO `addresses` (`id`, `address`) VALUES (1, 'Россия, г. Новокуйбышевск, Белорусская ул., д. 1 кв.117');
+INSERT INTO `addresses` (`id`, `address`) VALUES (2, 'Россия, г. Железногорск, Социалистическая ул., д. 11 кв.202');
+INSERT INTO `addresses` (`id`, `address`) VALUES (3, 'Россия, г. Тула, Хуторская ул., д. 19 кв.161');
+INSERT INTO `addresses` (`id`, `address`) VALUES (4, 'Россия, г. Домодедово, Озерный пер., д. 5 кв.54');
+INSERT INTO `addresses` (`id`, `address`) VALUES (5, 'Россия, г. Омск, Пушкина ул., д. 21 кв.92');
+INSERT INTO `addresses` (`id`, `address`) VALUES (6, 'Россия, г. Новосибирск, Юбилейная ул., д. 11 кв.215');
+INSERT INTO `addresses` (`id`, `address`) VALUES (7, 'Россия, г. Белгород, Вишневая ул., д. 4 кв.190');
+INSERT INTO `addresses` (`id`, `address`) VALUES (8, 'Россия, г. Барнаул, Дружбы ул., д. 9 кв.218');
+INSERT INTO `addresses` (`id`, `address`) VALUES (9, 'Россия, г. Назрань, Полевая ул., д. 23 кв.76');
+INSERT INTO `addresses` (`id`, `address`) VALUES (10, 'Россия, г. Кострома, Восточная ул., д. 5 кв.105');
+INSERT INTO `addresses` (`id`, `address`) VALUES (11, 'Россия, г. Симферополь, Социалистическая ул., д. 1 кв.5');
+INSERT INTO `addresses` (`id`, `address`) VALUES (12, 'Россия, г. Петропавловск-Камчатский, Минская ул., д. 23 кв.14');
+INSERT INTO `addresses` (`id`, `address`) VALUES (13, 'Россия, г. Нефтекамск, Севернаяул., д. 9 кв.109');
+
+// Вставка таблица services
+INSERT INTO `services` (`id`, `service`) VALUES (1, 'Диагностика аппаратного и программного обеспечения');
+INSERT INTO `services` (`id`, `service`) VALUES (2, 'Восстановление данных');
+INSERT INTO `services` (`id`, `service`) VALUES (3, 'Замена материнской платы');
+INSERT INTO `services` (`id`, `service`) VALUES (4, 'Замена оперативной памяти');
+INSERT INTO `services` (`id`, `service`) VALUES (5, 'Замена блока питания');
+INSERT INTO `services` (`id`, `service`) VALUES (6, 'Оптимизация производительности');
+INSERT INTO `services` (`id`, `service`) VALUES (7, 'Установка твердотельного накопителя');
+INSERT INTO `services` (`id`, `service`) VALUES (8, 'Консультации и обучение');
+INSERT INTO `services` (`id`, `service`) VALUES (9, 'Удаление вредоносных программ и восстановление после атак');
+INSERT INTO `services` (`id`, `service`) VALUES (10, 'Установка и настройка программного обеспечения');
+INSERT INTO `services` (`id`, `service`) VALUES (11, 'Замена термопасты');
+INSERT INTO `services` (`id`, `service`) VALUES (12, 'Чистка от пыли и грязи');
+
+// Вставка таблица service_price
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (1, 1, 1500);
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (2, 2, 2500);
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (3, 3, 2500);
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (4, 4, 2000);
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (5, 5, 1200);
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (6, 6, 2000);
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (7, 7, 1000);
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (8, 8, 5000);
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (9, 9, 2000);
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (10, 10, 2700);
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (11, 11, 500);
+INSERT INTO `service_price` (`id`, `id_service`, `service_price`) VALUES (12, 12, 1000);
+
+// Вставка таблица orders
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (1, 1, 'Доставлен', 1);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (2, 2, 'Доставлен', 2);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (3, 3, 'На складе', 3);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (4, 4, 'На складе', 4);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (5, 5, 'Доставлен', 5);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (6, 6, 'Обрабатывается', 6);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (7, 7, 'На складе', 7);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (8, 8, 'На складе', 8);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (9, 9, 'Обрабатывается', 9);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (10, 10, 'На складе', 10);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (11, 1, 'Доставлен', 11);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (12, 1, 'Доставлен', 12);
+INSERT INTO `orders` (`id`, `id_user`, `status`, `id_address`) VALUES (13, 5, 'На складе', 13);
+
+// Вставка таблица order_details
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (1, 1, 1);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (2, 1, 10);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (3, 2, 5);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (4, 2, 7);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (5, 2, 12);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (6, 3, 2);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (7, 4, 4);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (8, 4, 6);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (9, 5, 11);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (10, 5, 12);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (11, 6, 3);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (12, 7, 8);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (13, 7, 9);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (14, 8, 10);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (15, 9, 11);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (16, 10, 1);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (17, 10, 2);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (18, 11, 6);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (19, 12, 4);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (20, 12, 5);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (21, 13, 1);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (22, 13, 9);
+INSERT INTO `order_details` (`id`, `id_order`, `id_service`) VALUES (23, 13, 10);
+
+// Вставка таблица payments
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (1, 1, 1, 4200);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (2, 2, 2, 3200);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (3, 3, 3, 2500);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (4, 4, 4, 4000);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (5, 5, 5, 1500);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (6, 6, 6, 2500);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (7, 7, 7, 7000);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (8, 8, 8, 2700);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (9, 9, 9, 500);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (10, 10, 10, 4000);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (11, 1, 11, 2000);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (12, 1, 12, 3200);
+INSERT INTO `payments` (`id`, `id_user`, `id_order`, `payment_amount`) VALUES (13, 5, 13, 6200);
+
+// Вставка таблица user_addresses
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (1, 1);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (1, 11);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (1, 12);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (2, 2);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (3, 3);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (4, 4);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (5, 5);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (5, 13);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (6, 6);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (7, 7);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (8, 8);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (9, 9);
+INSERT INTO `user_addresses` (`user_id`, `id_address`) VALUES (10, 10);
+
+// Вставка таблица additional_services
+INSERT INTO `additional_services` (`id`, `additional_service`) VALUES (1, 'Замена матрицы монитора');
+INSERT INTO `additional_services` (`id`, `additional_service`) VALUES (2, 'Чистка клавиатуры PC');
+INSERT INTO `additional_services` (`id`, `additional_service`) VALUES (3, 'Чистка клавиатуры ноутбук');
+INSERT INTO `additional_services` (`id`, `additional_service`) VALUES (4, 'Сборка PC');
+INSERT INTO `additional_services` (`id`, `additional_service`) VALUES (5, 'Замена корпуса PC');
+INSERT INTO `additional_services` (`id`, `additional_service`) VALUES (6, 'Перенос инфоормации с одного PC на другой');
+INSERT INTO `additional_services` (`id`, `additional_service`) VALUES (7, 'Подбор компонентов для PC');
+
+// Вставка таблица services_additional_services
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (1, 1);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (1, 2);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (2, 2);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (2, 3);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (3, 3);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (3, 4);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (4, 4);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (5, 5);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (6, 6);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (7, 7);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (8, 1);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (9, 2);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (10, 3);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (11, 4);
+INSERT INTO `services_additional_services` (`service_id`, `additional_service_id`) VALUES (12, 5);
+
+
+// Запросы на удаление, изменение, получение
+// Получение списка всех пользователей
+SELECT * FROM users;
+
+// Получение списка всех услуг с ценами
+SELECT services.service, service_price.service_price FROM services
+JOIN service_price ON services.id = service_price.id_service;
+
+// Получение всех заказов пользователя с id=1
+SELECT users.id AS 'user id', orders.id AS 'order id' FROM users 
+JOIN orders ON users.id = orders.id_user
+WHERE users.id = 1;
+
+// Список всех услуг в заказе с id = 2
+SELECT order_details.id_order, services.service FROM order_details
+JOIN services ON order_details.id_service = services.id
+WHERE order_details.id_order = 2;
+
+// Обновление статуса заказа с id=3
+UPDATE orders SET `status` = 'Доставлен' WHERE id=3;
+
+// Удаление услуги с id=5
+DELETE FROM services WHERE id=5;
+
+// Выбор данных о пользователе, заказах, адресах, платежах
+SELECT users.id, users.username, users_profile.`name`, users_profile.email, orders.id AS 'order id', orders.`status`, 
+payments.payment_amount, addresses.address FROM payments
+JOIN orders ON payments.id_order = orders.id
+JOIN users ON users.id = orders.id_user
+JOIN users_profile ON users_profile.user_id = orders.id_user
+JOIN addresses ON addresses.id = orders.id_address;
